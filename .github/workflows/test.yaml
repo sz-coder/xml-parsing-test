@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
 
@@ -18,4 +16,13 @@ jobs:
       run: php -v
 
     - name: Run CI-Script
-      run: php test.php
+      run: php test.php && sleep 10 && touch abc
+
+  check:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: ls -la
